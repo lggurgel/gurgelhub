@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Search - DevArticles{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">Search Articles</h1>
+        <p class="mt-2 text-sm text-gray-500">Find exactly what you're looking for.</p>
+    </div>
+
+    <!-- Search Input -->
+    <div class="relative mb-8">
+        <input type="text" name="q" value="{{ query }}"
+            class="block w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-lg transition duration-150 ease-in-out shadow-sm"
+            placeholder="Search by title, content, or tags..." hx-get="/search"
+            hx-trigger="keyup changed delay:300ms, search" hx-target="#search-results" hx-push-url="true"
+            hx-indicator="#search-loading">
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <div id="search-loading" class="htmx-indicator">
+                <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Container -->
+    <div id="search-results">
+        {% include "partials/search_results.html" %}
+    </div>
+</div>
+{% endblock %}

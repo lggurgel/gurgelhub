@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../:/app
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/articles_db
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=dev_secret_key_change_in_prod
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD_HASH=$$2b$$12$$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW  # "secret"
+      - ENVIRONMENT=development
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=articles_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    command: ["postgres", "-c", "shared_preload_libraries=pg_trgm"]
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

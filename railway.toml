@@ -1,0 +1,12 @@
+[build]
+builder = "nixpacks"
+buildCommand = "alembic upgrade head"
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "on_failure"
+
+[nixpacks]
+pythonVersion = "3.11"

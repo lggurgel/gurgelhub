@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} - DevArticles{% endblock %}
+
+{% block content %}
+<article class="max-w-4xl mx-auto bg-white shadow sm:rounded-lg overflow-hidden">
+    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">{{ article.title }}</h1>
+        <div class="mt-2 flex items-center text-sm text-gray-500">
+            <time datetime="{{ article.published_at }}">{{ article.published_at.strftime('%B %d, %Y') if
+                article.published_at else 'Draft' }}</time>
+            <span class="mx-2">&middot;</span>
+            <span>{{ article.view_count }} views</span>
+            <span class="mx-2">&middot;</span>
+            <div class="flex space-x-2">
+                {% for tag in article.tags %}
+                <span
+                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                    {{ tag }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4 py-5 sm:p-6">
+        <div class="prose prose-blue max-w-none markdown-body">
+            {{ content_html | safe }}
+        </div>
+    </div>
+</article>
+{% endblock %}

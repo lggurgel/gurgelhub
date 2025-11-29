@@ -1,0 +1,38 @@
+[project]
+name = "markdown-article-platform"
+version = "0.1.0"
+description = "A Markdown Article Publishing Platform with FastAPI and PostgreSQL FTS"
+authors = [
+    {name = "Antigravity", email = "antigravity@example.com"},
+]
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "sqlalchemy>=2.0.25",
+    "alembic>=1.13.1",
+    "asyncpg>=0.29.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.1.0",
+    "python-multipart>=0.0.9",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "bcrypt==4.0.1",
+    "jinja2>=3.1.3",
+    "redis>=5.0.1",
+    "httpx>=0.26.0",
+    "markdown>=3.5.2",
+    "pygments>=2.17.2",
+    "psycopg2-binary>=2.9.9", # For sync operations if needed, though we use asyncpg
+    "email-validator>=2.1.0.post1"
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
