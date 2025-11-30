@@ -1,4 +1,5 @@
-from typing import Literal
+from typing import Literal, Any, Optional
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
@@ -13,6 +14,13 @@ class Settings(BaseSettings):
     SEARCH_RESULTS_PER_PAGE: int = 10
     SEARCH_SNIPPET_LENGTH: int = 150
     SEARCH_CACHE_TTL_SECONDS: int = 300
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def assemble_db_connection(cls, v: Optional[str]) -> str:
+        if isinstance(v, str) and v.startswith("postgresql://"):
+            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return v
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
