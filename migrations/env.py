@@ -17,6 +17,8 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+from app.config import settings
+
 # Override sqlalchemy.url with env var if present
 # We use settings.DATABASE_URL because it includes the fix for asyncpg scheme
 db_url = settings.DATABASE_URL
