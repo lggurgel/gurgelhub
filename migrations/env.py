@@ -17,8 +17,11 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+from app.config import settings
+
 # Override sqlalchemy.url with env var if present
-db_url = os.getenv("DATABASE_URL")
+# We use settings.DATABASE_URL because it includes the fix for asyncpg scheme
+db_url = settings.DATABASE_URL
 if db_url:
     config.set_main_option("sqlalchemy.url", db_url)
 
