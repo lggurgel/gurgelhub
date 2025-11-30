@@ -32,6 +32,12 @@ if db_url:
         print(f"Connecting to database URL: {masked_url}")
     except Exception as e:
         print(f"Could not parse/mask URL for logging: {e}")
+        # Log the raw URL type and length, and a safe prefix to debug
+        print(f"Raw URL type: {type(db_url)}")
+        print(f"Raw URL length: {len(db_url)}")
+        # Show first 20 chars to identify scheme issues (safe as password usually comes later)
+        safe_prefix = db_url[:20] if isinstance(db_url, str) else "N/A"
+        print(f"Raw URL prefix: {safe_prefix}...")
 
 if db_url:
     config.set_main_option("sqlalchemy.url", db_url)
