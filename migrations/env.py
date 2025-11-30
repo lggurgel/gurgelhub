@@ -18,7 +18,19 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 # Override sqlalchemy.url with env var if present
-db_url = os.getenv("DATABASE_URL")
+# We use settings.DATABASE_URL because it includes the fix for asyncpg scheme
+db_url = settings.DATABASE_URL
+
+# Debug logging to check the URL (masking password)
+if db_url:
+    try:
+        from sqlalchemy.engine.url import make_url
+        u = make_url(db_url)
+        masked_url = u.render_as_string(hide_password=True)
+        print(f"Connecting to database URL: {masked_url}")
+    except Exception as e:
+        print(f"Could not parse/mask URL for logging: {e}")
+
 if db_url:
     config.set_main_option("sqlalchemy.url", db_url)
 
