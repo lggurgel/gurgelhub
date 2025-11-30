@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     @classmethod
     def assemble_db_connection(cls, v: Optional[str]) -> str:
         if isinstance(v, str):
+            v = v.strip()
             if v.startswith("postgresql://"):
                 return v.replace("postgresql://", "postgresql+asyncpg://", 1)
             elif v.startswith("postgres://"):
