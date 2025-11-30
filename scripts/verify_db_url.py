@@ -26,5 +26,11 @@ def test_database_url_validation():
     assert settings.DATABASE_URL == "postgresql+asyncpg://user:pass@localhost:5432/db"
     print("SUCCESS: Correct URL was preserved.")
 
+    # Test case 3: postgres:// URL (common in some providers)
+    os.environ["DATABASE_URL"] = "postgres://user:pass@localhost:5432/db"
+    settings = Settings()
+    assert settings.DATABASE_URL == "postgresql+asyncpg://user:pass@localhost:5432/db"
+    print("SUCCESS: postgres:// URL was correctly transformed.")
+
 if __name__ == "__main__":
     test_database_url_validation()
