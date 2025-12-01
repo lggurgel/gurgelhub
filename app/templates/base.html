@@ -1,116 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-50">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GurgelHub - Technical articles on software engineering, distributed systems, and GPU programming">
     <title>{% block title %}GurgelHub{% endblock %}</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6',
-                    },
-                    typography: (theme) => ({
-                        DEFAULT: {
-                            css: {
-                                color: theme('colors.gray.800'),
-                                a: {
-                                    color: theme('colors.primary'),
-                                    '&:hover': {
-                                        color: theme('colors.blue.700'),
-                                    },
-                                },
-                            },
-                        },
-                    }),
-                }
-            }
-        }
-    </script>
+    <!-- Fonts: Crimson Pro (display), Source Sans 3 (body), JetBrains Mono (code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/syntax.css">
 
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
-    <!-- Pygments CSS for syntax highlighting -->
-    <link rel="stylesheet" href="/static/css/pygments.css">
-
-    <style>
-        /* Custom styles */
-        .markdown-body pre {
-            background-color: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-        }
-
-        mark {
-            background-color: #fef08a;
-            padding: 0.1rem 0.2rem;
-            border-radius: 0.2rem;
-        }
-    </style>
+    {% block head %}{% endblock %}
 </head>
 
-<body class="h-full flex flex-col">
-    <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="text-xl font-bold text-gray-900">GurgelHub</a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="/"
-                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Home
-                        </a>
-                        <a href="/search"
-                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Search
-                        </a>
-                        <a href="/about"
-                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            About
-                        </a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <!-- Search Bar (Simple) -->
-                    <div class="flex-shrink-0">
-                        <form action="/search" method="get" class="relative">
-                            <input type="text" name="q" placeholder="Search..."
-                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm transition duration-150 ease-in-out">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon">⚡</div>
+                <span>GurgelHub</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Articles</a></li>
+                <li><a href="/search" class="nav-link {% if '/search' in request.url.path %}active{% endif %}">Search</a></li>
+                <li><a href="/about" class="nav-link {% if '/about' in request.url.path %}active{% endif %}">About</a></li>
+            </ul>
+
+            <div class="search-wrapper">
+                <form action="/search" method="get">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" name="q" class="search-input" placeholder="Search... (press /)" autocomplete="off">
+                </form>
             </div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto py-6 sm:px-6 lg:px-8">
-        {% block content %}{% endblock %}
+    <!-- Reading Progress (shown on article pages) -->
+    {% block progress %}{% endblock %}
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
-    <footer class="bg-white border-t border-gray-200 mt-auto">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm text-gray-500">
-                &copy; 2025 GurgelHub. All rights reserved.
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                &copy; 2025 <a href="/">GurgelHub</a>. Built with
+                <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener">FastAPI</a> &
+                <a href="https://htmx.org/" target="_blank" rel="noopener">HTMX</a>.
             </p>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

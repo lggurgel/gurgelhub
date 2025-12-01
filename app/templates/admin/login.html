@@ -3,46 +3,73 @@
 {% block title %}Admin Login{% endblock %}
 
 {% block content %}
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                Sign in to Admin Portal
-            </h2>
+<div style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+    <div style="width: 100%; max-width: 400px;">
+        <div style="text-align: center; margin-bottom: 2rem;" class="fade-in-up">
+            <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.75rem;">
+                🔐
+            </div>
+            <h1 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Admin Portal</h1>
+            <p style="color: var(--text-muted);">Sign in to manage your content</p>
         </div>
-        <form class="mt-8 space-y-6" action="/admin/login" method="POST">
+
+        <form action="/admin/login" method="POST" style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem;" class="fade-in-up stagger-1">
             {% if error %}
-            <div class="rounded-md bg-red-50 p-4">
-                <div class="flex">
-                    <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">{{ error }}</h3>
-                    </div>
-                </div>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span style="color: #ef4444; font-size: 0.9375rem;">{{ error }}</span>
             </div>
             {% endif %}
 
-            <div class="rounded-md shadow-sm -space-y-px">
-                <div>
-                    <label for="username" class="sr-only">Username</label>
-                    <input id="username" name="username" type="text" required
-                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                        placeholder="Username">
-                </div>
-                <div>
-                    <label for="password" class="sr-only">Password</label>
-                    <input id="password" name="password" type="password" required
-                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                        placeholder="Password">
-                </div>
+            <div style="margin-bottom: 1.25rem;">
+                <label for="username" style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem;">Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    autocomplete="username"
+                    style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: 8px; outline: none; transition: all 150ms ease;"
+                    placeholder="Enter your username">
             </div>
 
-            <div>
-                <button type="submit"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Sign in
-                </button>
+            <div style="margin-bottom: 1.5rem;">
+                <label for="password" style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem;">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    autocomplete="current-password"
+                    style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: 8px; outline: none; transition: all 150ms ease;"
+                    placeholder="Enter your password">
             </div>
+
+            <button
+                type="submit"
+                style="width: 100%; padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600; color: var(--text-inverse); background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: none; border-radius: 8px; cursor: pointer; transition: all 150ms ease;">
+                Sign in
+            </button>
         </form>
+
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
+            <a href="/" style="color: var(--text-secondary);">← Back to homepage</a>
+        </p>
     </div>
 </div>
+
+<style>
+    input:focus {
+        border-color: var(--accent-primary) !important;
+        box-shadow: 0 0 0 3px var(--accent-muted);
+    }
+    button[type="submit"]:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+</style>
 {% endblock %}

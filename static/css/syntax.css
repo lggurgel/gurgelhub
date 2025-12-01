@@ -1,0 +1,482 @@
+/* ============================================
+   Obsidian Amber - Syntax Highlighting Theme
+   Inspired by One Dark Pro & Catppuccin
+   ============================================ */
+
+/* Base styles for code blocks */
+.codehilite,
+.highlight {
+  background: var(--bg-primary);
+  color: #e8eaed;
+}
+
+/* Ensure code blocks have proper font */
+.codehilite pre,
+.codehilite code,
+.highlight pre,
+.highlight code,
+pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  font-feature-settings: 'liga' on, 'calt' on;
+}
+
+/* Line numbers */
+.codehilite .linenos,
+.highlight .linenos {
+  color: #5f6368;
+  padding-right: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  margin-right: 1rem;
+  user-select: none;
+}
+
+/* Pygments Token Classes */
+
+/* Comments - Muted gray */
+.codehilite .c,    /* Comment */
+.codehilite .c1,   /* Comment.Single */
+.codehilite .cm,   /* Comment.Multiline */
+.codehilite .cs,   /* Comment.Special */
+.codehilite .cp,   /* Comment.Preproc */
+.codehilite .cpf   /* Comment.PreprocFile */
+{
+  color: #6e7681;
+  font-style: italic;
+}
+
+/* Errors - Red */
+.codehilite .err {
+  color: #f85149;
+  background: transparent;
+}
+
+/* Generic */
+.codehilite .gd { color: #f85149; background: rgba(248, 81, 73, 0.1); } /* Deleted */
+.codehilite .ge { font-style: italic; } /* Emphasis */
+.codehilite .gi { color: #3fb950; background: rgba(63, 185, 80, 0.1); } /* Inserted */
+.codehilite .go { color: #8b949e; } /* Output */
+.codehilite .gp { color: #8b949e; } /* Prompt */
+.codehilite .gs { font-weight: bold; } /* Strong */
+.codehilite .gu { color: #3fb950; font-weight: bold; } /* Subheading */
+
+/* Keywords - Purple/Magenta */
+.codehilite .k,    /* Keyword */
+.codehilite .kc,   /* Keyword.Constant */
+.codehilite .kd,   /* Keyword.Declaration */
+.codehilite .kn,   /* Keyword.Namespace */
+.codehilite .kp,   /* Keyword.Pseudo */
+.codehilite .kr,   /* Keyword.Reserved */
+.codehilite .kt    /* Keyword.Type */
+{
+  color: #c678dd;
+  font-weight: 500;
+}
+
+/* Literals */
+.codehilite .l,    /* Literal */
+.codehilite .ld   /* Literal.Date */
+{
+  color: #d19a66;
+}
+
+/* Numbers - Orange */
+.codehilite .m,    /* Number */
+.codehilite .mf,   /* Number.Float */
+.codehilite .mh,   /* Number.Hex */
+.codehilite .mi,   /* Number.Integer */
+.codehilite .mo,   /* Number.Oct */
+.codehilite .mb,   /* Number.Bin */
+.codehilite .il    /* Number.Integer.Long */
+{
+  color: #d19a66;
+}
+
+/* Strings - Green */
+.codehilite .s,    /* String */
+.codehilite .s1,   /* String.Single */
+.codehilite .s2,   /* String.Double */
+.codehilite .sb,   /* String.Backtick */
+.codehilite .sc,   /* String.Char */
+.codehilite .sd,   /* String.Doc */
+.codehilite .se,   /* String.Escape */
+.codehilite .sh,   /* String.Heredoc */
+.codehilite .si,   /* String.Interpol */
+.codehilite .sr,   /* String.Regex */
+.codehilite .ss,   /* String.Symbol */
+.codehilite .sx   /* String.Other */
+{
+  color: #98c379;
+}
+
+/* String Interpol - Cyan */
+.codehilite .si {
+  color: #56b6c2;
+}
+
+/* Names - Various */
+.codehilite .n    /* Name */
+{
+  color: #e8eaed;
+}
+
+.codehilite .na   /* Name.Attribute */
+{
+  color: #e5c07b;
+}
+
+.codehilite .nb   /* Name.Builtin */
+{
+  color: #e5c07b;
+}
+
+.codehilite .nc   /* Name.Class */
+{
+  color: #e5c07b;
+  font-weight: 500;
+}
+
+.codehilite .nd   /* Name.Decorator */
+{
+  color: #e5c07b;
+}
+
+.codehilite .ne   /* Name.Exception */
+{
+  color: #e5c07b;
+  font-weight: 500;
+}
+
+.codehilite .nf,   /* Name.Function */
+.codehilite .fm   /* Name.Function.Magic */
+{
+  color: #61afef;
+}
+
+.codehilite .ni   /* Name.Entity */
+{
+  color: #d19a66;
+}
+
+.codehilite .nl   /* Name.Label */
+{
+  color: #e5c07b;
+}
+
+.codehilite .nn   /* Name.Namespace */
+{
+  color: #e5c07b;
+}
+
+.codehilite .no   /* Name.Constant */
+{
+  color: #d19a66;
+}
+
+.codehilite .nt   /* Name.Tag (HTML/XML) */
+{
+  color: #e06c75;
+}
+
+.codehilite .nv,   /* Name.Variable */
+.codehilite .vm,   /* Name.Variable.Magic */
+.codehilite .vc,   /* Name.Variable.Class */
+.codehilite .vg,   /* Name.Variable.Global */
+.codehilite .vi    /* Name.Variable.Instance */
+{
+  color: #e06c75;
+}
+
+/* Operators - Light */
+.codehilite .o,    /* Operator */
+.codehilite .ow   /* Operator.Word */
+{
+  color: #56b6c2;
+}
+
+/* Punctuation */
+.codehilite .p {
+  color: #abb2bf;
+}
+
+/* Whitespace */
+.codehilite .w {
+  color: #8b949e;
+}
+
+/* ============================================
+   Language-Specific Customizations
+   ============================================ */
+
+/* Python specific */
+.codehilite .language-python .bp { /* Python Builtin.Pseudo */
+  color: #e5c07b;
+}
+
+/* JavaScript/TypeScript */
+.codehilite .language-javascript .kd,
+.codehilite .language-typescript .kd {
+  color: #c678dd;
+}
+
+.codehilite .language-javascript .nx,
+.codehilite .language-typescript .nx {
+  color: #e06c75;
+}
+
+/* JSON */
+.codehilite .language-json .nt {
+  color: #e06c75;
+}
+
+.codehilite .language-json .s2 {
+  color: #98c379;
+}
+
+/* HTML */
+.codehilite .language-html .nt {
+  color: #e06c75;
+}
+
+.codehilite .language-html .na {
+  color: #d19a66;
+}
+
+.codehilite .language-html .s {
+  color: #98c379;
+}
+
+/* CSS */
+.codehilite .language-css .nc,
+.codehilite .language-css .nt {
+  color: #e06c75;
+}
+
+.codehilite .language-css .k {
+  color: #56b6c2;
+}
+
+.codehilite .language-css .nd {
+  color: #d19a66;
+}
+
+/* SQL */
+.codehilite .language-sql .k {
+  color: #c678dd;
+  text-transform: uppercase;
+}
+
+/* Shell/Bash */
+.codehilite .language-bash .nb,
+.codehilite .language-shell .nb {
+  color: #56b6c2;
+}
+
+.codehilite .language-bash .nv,
+.codehilite .language-shell .nv {
+  color: #e06c75;
+}
+
+/* Go */
+.codehilite .language-go .kt {
+  color: #56b6c2;
+}
+
+/* Rust */
+.codehilite .language-rust .n {
+  color: #e8eaed;
+}
+
+.codehilite .language-rust .nc {
+  color: #e5c07b;
+}
+
+/* YAML */
+.codehilite .language-yaml .nt {
+  color: #56b6c2;
+}
+
+.codehilite .language-yaml .l {
+  color: #98c379;
+}
+
+/* Markdown */
+.codehilite .language-markdown .gu,
+.codehilite .language-markdown .gh {
+  color: #e06c75;
+  font-weight: bold;
+}
+
+/* ============================================
+   Diff highlighting
+   ============================================ */
+
+.codehilite .gd {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.15);
+}
+
+.codehilite .gi {
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.15);
+}
+
+.codehilite .gd .x {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.3);
+}
+
+.codehilite .gi .x {
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.3);
+}
+
+/* ============================================
+   Code block enhancements
+   ============================================ */
+
+/* Code block wrapper with language label */
+.code-block {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 1rem;
+  background: #1e232c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+
+.code-block-lang {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9aa0a6;
+}
+
+.code-block-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #9aa0a6;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.code-block-copy:hover {
+  color: #e8eaed;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.code-block-copy.copied {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.code-block-copy svg {
+  width: 14px;
+  height: 14px;
+}
+
+.code-block .codehilite,
+.code-block pre {
+  margin: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Scrollbar styling for code blocks */
+.codehilite pre::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+  height: 8px;
+  background: transparent;
+}
+
+.codehilite pre::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.codehilite pre::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.codehilite pre::-webkit-scrollbar-thumb:hover,
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Line highlighting */
+.codehilite .hll {
+  background: rgba(245, 158, 11, 0.15);
+  margin: 0 -1.5rem;
+  padding: 0 1.5rem;
+  display: block;
+}
+
+/* ============================================
+   Inline code styling
+   ============================================ */
+
+code:not(.codehilite code):not(pre code) {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+  background: #1e232c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #fbbf24;
+}
+
+/* ============================================
+   Terminal/Console output styling
+   ============================================ */
+
+.codehilite.language-console pre,
+.codehilite.language-terminal pre,
+.codehilite.language-shell pre {
+  background: #0d0f12;
+}
+
+/* Shell prompt styling */
+.codehilite .gp {
+  color: #98c379;
+  user-select: none;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes code-highlight-pulse {
+  0%, 100% {
+    background: rgba(245, 158, 11, 0.15);
+  }
+  50% {
+    background: rgba(245, 158, 11, 0.25);
+  }
+}
+
+.code-line-highlight {
+  animation: code-highlight-pulse 2s ease-in-out;
+}
+

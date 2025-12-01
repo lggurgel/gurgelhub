@@ -3,30 +3,42 @@
 {% block title %}Search - GurgelHub{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto">
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">Search Articles</h1>
-        <p class="mt-2 text-sm text-gray-500">Find exactly what you're looking for.</p>
-    </div>
+<div class="content-width">
+    <!-- Search Header -->
+    <header class="search-page-header fade-in-up">
+        <h1>Search Articles</h1>
+        <p>Find exactly what you're looking for.</p>
+    </header>
 
     <!-- Search Input -->
-    <div class="relative mb-8">
-        <input type="text" name="q" value="{{ query }}"
-            class="block w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-lg transition duration-150 ease-in-out shadow-sm"
-            placeholder="Search by title, content, or tags..." hx-get="/search"
-            hx-trigger="keyup changed delay:300ms, search" hx-target="#search-results" hx-push-url="true"
-            hx-indicator="#search-loading">
-        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <div id="search-loading" class="htmx-indicator">
-                <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                    </path>
-                </svg>
-            </div>
+    <div style="position: relative; max-width: 600px; margin: 0 auto 2.5rem;">
+        <svg style="position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--text-muted); pointer-events: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            class="search-input-large"
+            style="padding-left: 3.5rem;"
+            placeholder="Search by title, content, or tags..."
+            hx-get="/search"
+            hx-trigger="keyup changed delay:300ms, search"
+            hx-target="#search-results"
+            hx-push-url="true"
+            hx-indicator="#search-loading"
+            autofocus>
+        <div id="search-loading" class="htmx-indicator" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);">
+            <div class="spinner"></div>
         </div>
+    </div>
+
+    <!-- Keyboard Shortcut Hint -->
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <span style="font-size: 0.8125rem; color: var(--text-muted);">
+            Pro tip: Press <kbd style="font-family: var(--font-mono); font-size: 0.75rem; padding: 0.15em 0.4em; background: var(--bg-surface); border: 1px solid var(--border-default); border-bottom-width: 2px; border-radius: 4px; color: var(--text-secondary);">/</kbd> anywhere to focus search
+        </span>
     </div>
 
     <!-- Results Container -->
