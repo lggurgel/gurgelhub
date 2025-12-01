@@ -1,44 +1,60 @@
 {% if results %}
-<div class="mb-4 text-sm text-gray-500">
-    Found {{ total }} results in {{ "%.2f"|format(duration) }}ms
+<div class="search-results-info fade-in-up">
+    Found <strong style="color: var(--text-primary);">{{ total }}</strong> results in <span style="color: var(--success);">{{ "%.2f"|format(duration) }}ms</span>
 </div>
 
-<div class="space-y-6">
+<div style="display: flex; flex-direction: column; gap: 1rem;">
     {% for result in results %}
-    <div class="bg-white shadow rounded-lg p-6 transition hover:shadow-md">
-        <a href="/article/{{ result.slug }}" class="block">
-            <h3 class="text-xl font-semibold text-blue-600 hover:underline mb-1">
-                {{ result.title }}
-            </h3>
-        </a>
-        <div class="text-sm text-gray-500 mb-2">
-            <span class="font-medium text-green-600">Score: {{ "%.2f"|format(result.relevance_score) }}</span>
-            &middot;
-            {{ result.published_at.strftime('%b %d, %Y') if result.published_at else 'Draft' }}
+    <article class="search-result-card fade-in-up" style="animation-delay: {{ loop.index * 50 }}ms;">
+        <h3 class="search-result-title">
+            <a href="/article/{{ result.slug }}">{{ result.title }}</a>
+        </h3>
+
+        <div class="search-result-meta">
+            <span class="score">Score: {{ "%.2f"|format(result.relevance_score) }}</span>
+            <span style="margin: 0 0.5rem;">·</span>
+            <span>{{ result.published_at.strftime('%b %d, %Y') if result.published_at else 'Draft' }}</span>
         </div>
 
-        <!-- Snippet with highlighting -->
-        <div class="text-gray-700 text-sm mb-3">
+        <p class="search-result-snippet">
             {{ result.snippet | safe }}...
-        </div>
+        </p>
 
-        <div class="flex space-x-2">
+        <div class="article-tags">
             {% for tag in result.tags %}
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
-                {{ tag }}
-            </span>
+            <span class="tag">{{ tag }}</span>
             {% endfor %}
         </div>
-    </div>
+    </article>
     {% endfor %}
 </div>
+
 {% elif query %}
-<div class="text-center py-12">
-    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+<div class="empty-state fade-in-up">
+    <svg class="empty-state-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+        <path d="M8 8l6 6"></path>
     </svg>
-    <h3 class="mt-2 text-sm font-medium text-gray-900">No results found</h3>
-    <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter to find what you're looking for.</p>
+    <h3>No results found</h3>
+    <p>Try adjusting your search terms or browse all articles.</p>
+    <a href="/" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--accent-muted); border: 1px solid var(--border-accent); border-radius: 8px; color: var(--accent-primary); font-weight: 500;">
+        Browse all articles
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </a>
+</div>
+
+{% else %}
+<!-- Initial state: no query yet -->
+<div class="empty-state fade-in-up" style="padding: 3rem 2rem;">
+    <svg class="empty-state-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <h3>Start searching</h3>
+    <p>Type in the search box above to find articles.</p>
 </div>
 {% endif %}

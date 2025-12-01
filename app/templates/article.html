@@ -2,31 +2,97 @@
 
 {% block title %}{{ article.title }} - GurgelHub{% endblock %}
 
+{% block head %}
+<meta property="og:title" content="{{ article.title }}">
+<meta property="og:description" content="{{ article.description }}">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block progress %}
+<div class="reading-progress"></div>
+{% endblock %}
+
 {% block content %}
-<article class="max-w-4xl mx-auto bg-white shadow sm:rounded-lg overflow-hidden">
-    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">{{ article.title }}</h1>
-        <div class="mt-2 flex items-center text-sm text-gray-500">
-            <time datetime="{{ article.published_at }}">{{ article.published_at.strftime('%B %d, %Y') if
-                article.published_at else 'Draft' }}</time>
-            <span class="mx-2">&middot;</span>
-            <span>{{ article.view_count }} views</span>
-            <span class="mx-2">&middot;</span>
-            <div class="flex space-x-2">
-                {% for tag in article.tags %}
-                <span
-                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
-                    {{ tag }}
-                </span>
-                {% endfor %}
+<!-- Table of Contents (sticky sidebar) -->
+<aside class="toc-wrapper">
+    <div class="toc">
+        <div class="toc-title">On This Page</div>
+        <ul class="toc-list">
+            <!-- Populated by JavaScript -->
+        </ul>
+    </div>
+</aside>
+
+<article class="article-container fade-in-up">
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-tags">
+            {% for tag in article.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+
+        <h1>{{ article.title }}</h1>
+
+        <div class="article-header-meta">
+            <div class="article-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <time datetime="{{ article.published_at }}">
+                    {{ article.published_at.strftime('%B %d, %Y') if article.published_at else 'Draft' }}
+                </time>
+            </div>
+
+            <div class="article-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>{{ article.view_count }} views</span>
+            </div>
+
+            <div class="reading-time article-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span class="reading-time-value">— min read</span>
             </div>
         </div>
+    </header>
+
+    <!-- Article Content -->
+    <div class="markdown-body">
+        {{ content_html | safe }}
     </div>
 
-    <div class="px-4 py-5 sm:p-6">
-        <div class="prose prose-blue max-w-none markdown-body">
-            {{ content_html | safe }}
+    <!-- Article Footer -->
+    <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem;">Written by</div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div class="avatar">L</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Lucas Gurgel</div>
+                        <div style="font-size: 0.875rem; color: var(--text-muted);">Staff Software Engineer</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: 8px; color: var(--text-secondary); font-weight: 500; transition: all 150ms ease;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to articles
+            </a>
         </div>
-    </div>
+    </footer>
 </article>
 {% endblock %}
