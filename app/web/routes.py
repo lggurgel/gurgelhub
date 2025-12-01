@@ -106,3 +106,10 @@ async def search_page(
             "duration": duration
         }
     )
+
+@router.get("/about", response_class=HTMLResponse)
+async def about_page(request: Request):
+    return templates.TemplateResponse(
+        "about.html",
+        {"request": request}
+    )

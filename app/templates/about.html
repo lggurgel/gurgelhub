@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}About Me - Lucas Gurgel{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden bg-white py-16">
+    <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+        <div class="relative h-full w-full" aria-hidden="true">
+            <svg class="absolute top-0 left-full -ml-80 h-[800px] w-[800px] -translate-x-1/2 transform lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0 opacity-20"
+                fill="none" viewBox="0 0 800 800">
+                <defs>
+                    <pattern id="e813992c-7d03-4cc4-a2bd-151760b470a0" x="0" y="0" width="20" height="20"
+                        patternUnits="userSpaceOnUse">
+                        <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="800" height="800" fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="relative px-6 lg:px-8">
+        <div class="mx-auto max-w-prose text-lg">
+            <h1>
+                <span class="block text-center text-lg font-semibold text-primary">Staff Software Engineer</span>
+                <span
+                    class="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">Hi,
+                    I'm Lucas Gurgel 👋</span>
+            </h1>
+            <p class="mt-8 text-xl leading-8 text-gray-500 text-center">
+                I build high-performance, scalable systems and love solving complex engineering challenges.
+            </p>
+        </div>
+
+        <div class="prose prose-lg prose-blue mx-auto mt-6 text-gray-500">
+            <p>
+                With a deep passion for low-level optimization and distributed systems, I specialize in crafting robust
+                solutions that stand the test of scale. My journey involves everything from optimizing GPU kernels for
+                cryptography to building resilient backend architectures.
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-6">Technical Arsenal</h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-lg font-medium text-gray-900">Languages</h3>
+                    <p class="mt-2 text-sm text-gray-500">Python, C++, Go, Rust, JavaScript/TypeScript</p>
+                </div>
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-lg font-medium text-gray-900">Backend & Cloud</h3>
+                    <p class="mt-2 text-sm text-gray-500">FastAPI, Django, Docker, Kubernetes, AWS, GCP</p>
+                </div>
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-lg font-medium text-gray-900">Specialties</h3>
+                    <p class="mt-2 text-sm text-gray-500">Distributed Systems, GPU Programming (Metal/CUDA),
+                        Cryptography</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-6">Featured Projects</h2>
+            <div class="space-y-8">
+                <div class="flex flex-col rounded-2xl bg-gray-50 p-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold text-gray-900">Silikangaroo</h3>
+                        <span
+                            class="inline-flex items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800">C++
+                            / Metal</span>
+                    </div>
+                    <p class="mt-4 text-base text-gray-500">
+                        A high-performance Bitcoin public key recovery tool optimized for Apple Silicon (M1/M2/M3).
+                        Leverages the Metal API for GPU acceleration to solve Pollard's Kangaroo algorithm at blazing
+                        speeds.
+                    </p>
+                    <div class="mt-6">
+                        <a href="https://github.com/lggurgel/silikongaroo"
+                            class="text-base font-semibold text-primary hover:text-blue-600">
+                            View on GitHub <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl bg-gray-50 p-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold text-gray-900">Dockangaroo</h3>
+                        <span
+                            class="inline-flex items-center rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">Python
+                            / Docker</span>
+                    </div>
+                    <p class="mt-4 text-base text-gray-500">
+                        Containerized implementation of Pollard's Kangaroo algorithm. Designed for ease of deployment
+                        and reproducibility in hunting Bitcoin puzzle keys.
+                    </p>
+                    <div class="mt-6">
+                        <a href="https://github.com/lggurgel/dockangaroo"
+                            class="text-base font-semibold text-primary hover:text-blue-600">
+                            View on GitHub <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 border-t border-gray-200 pt-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Let's Connect</h2>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://github.com/lggurgel" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/lucas-gurgel-dev/" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
