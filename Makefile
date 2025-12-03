@@ -1,4 +1,4 @@
-.PHONY: up down restart logs shell create-admin test
+.PHONY: up down restart logs shell create-admin test migrate migrate-down
 
 # Docker Compose commands
 up:
@@ -22,3 +22,12 @@ create-admin:
 
 test:
 	docker-compose -f docker/docker-compose.yml exec web pytest
+
+# Database migrations
+migrate:
+	@echo "Applying database migrations..."
+	@docker-compose -f docker/docker-compose.yml exec web alembic upgrade head
+
+migrate-down:
+	@echo "Rolling back last migration..."
+	@docker-compose -f docker/docker-compose.yml exec web alembic downgrade -1

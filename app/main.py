@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api.v1.routes import articles, search, auth, admin
+from app.api.v1.routes import articles, search, auth, admin, comments
 from app.config import settings
 
 app = FastAPI(
@@ -33,6 +33,7 @@ app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(articles.router, prefix="/api/v1/articles", tags=["articles"])
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
 app.include_router(admin.router, prefix="/api/v1/admin", tags=["admin"])
+app.include_router(comments.router, prefix="/api/v1", tags=["comments"])
 
 # Web Routes (SSR)
 from app.web import routes as web_routes
