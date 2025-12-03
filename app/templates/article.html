@@ -7,6 +7,7 @@
 <meta property="og:description" content="{{ article.description }}">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/static/css/comments.css">
 {% endblock %}
 
 {% block progress %}
@@ -24,7 +25,35 @@
     </div>
 </aside>
 
-<article class="article-container fade-in-up">
+<!-- Inline Comments Sidebar -->
+<aside class="inline-comments-sidebar" id="inline-comments-sidebar">
+    <div class="inline-comments-header">
+        <h3>Comments</h3>
+        <button class="inline-comments-close" id="close-inline-sidebar" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+    <div class="inline-comments-content" id="inline-comments-content">
+        <!-- Populated by JavaScript -->
+    </div>
+</aside>
+
+<!-- Comment Selection Tooltip -->
+<div class="comment-tooltip" id="comment-tooltip" style="display: none;">
+    <button class="comment-tooltip-btn" id="add-inline-comment-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <line x1="12" y1="8" x2="12" y2="14"></line>
+            <line x1="9" y1="11" x2="15" y2="11"></line>
+        </svg>
+        <span>Add comment</span>
+    </button>
+</div>
+
+<article class="article-container fade-in-up" data-article-id="{{ article.id }}">
     <!-- Article Header -->
     <header class="article-header">
         <div class="article-tags">
@@ -63,11 +92,18 @@
                 </svg>
                 <span class="reading-time-value">— min read</span>
             </div>
+
+            <div class="article-meta-item comment-count-indicator" id="comment-count-indicator" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span id="total-comment-count">0</span> comments
+            </div>
         </div>
     </header>
 
     <!-- Article Content -->
-    <div class="markdown-body">
+    <div class="markdown-body" id="article-content">
         {{ content_html | safe }}
     </div>
 
@@ -95,4 +131,138 @@
         </div>
     </footer>
 </article>
+
+<!-- General Comments Section -->
+<section class="comments-section" id="comments-section">
+    <div class="comments-container content-width">
+        <header class="comments-header">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Discussion
+                <span class="comments-count" id="general-comments-count">(0)</span>
+            </h2>
+            <p class="comments-subtitle">Share your thoughts and join the conversation</p>
+        </header>
+
+        <!-- New Comment Form -->
+        <div class="comment-form-wrapper" id="new-comment-form">
+            <div class="comment-form">
+                <div class="comment-form-avatar">
+                    <div class="avatar avatar-anon" id="comment-form-avatar">?</div>
+                </div>
+                <div class="comment-form-content">
+                    <div class="comment-form-identity">
+                        <input
+                            type="text"
+                            id="commenter-name"
+                            class="comment-name-input"
+                            placeholder="Your name (optional)"
+                            maxlength="100"
+                        >
+                        <label class="remember-name-label">
+                            <input type="checkbox" id="remember-name" checked>
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+                    <textarea
+                        id="comment-content"
+                        class="comment-textarea"
+                        placeholder="Write a comment..."
+                        rows="3"
+                        maxlength="10000"
+                    ></textarea>
+                    <div class="comment-form-actions">
+                        <span class="comment-char-count"><span id="char-count">0</span>/10000</span>
+                        <button type="button" class="btn btn-primary" id="submit-comment">
+                            Post Comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Loading State -->
+        <div class="comments-loading" id="comments-loading">
+            <div class="spinner"></div>
+            <span>Loading comments...</span>
+        </div>
+
+        <!-- Comments Empty State -->
+        <div class="comments-empty" id="comments-empty" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <h3>No comments yet</h3>
+            <p>Be the first to share your thoughts!</p>
+        </div>
+
+        <!-- Comments List (populated by JavaScript) -->
+        <div class="comments-list" id="comments-list"></div>
+
+        <!-- Load More -->
+        <div class="comments-pagination" id="comments-pagination" style="display: none;">
+            <button class="btn btn-secondary" id="load-more-comments">
+                Load more comments
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Inline Comment Modal -->
+<div class="modal-overlay" id="inline-comment-modal" style="display: none;">
+    <div class="modal-content inline-comment-modal-content">
+        <div class="modal-header">
+            <h3>Add Comment</h3>
+            <button class="modal-close" id="close-inline-modal" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="inline-comment-selection">
+                <span class="selection-label">Selected text:</span>
+                <blockquote class="selected-text-preview" id="selected-text-preview"></blockquote>
+            </div>
+            <div class="inline-comment-form">
+                <input
+                    type="text"
+                    id="inline-commenter-name"
+                    class="comment-name-input"
+                    placeholder="Your name (optional)"
+                    maxlength="100"
+                >
+                <textarea
+                    id="inline-comment-content"
+                    class="comment-textarea"
+                    placeholder="Write your comment..."
+                    rows="4"
+                    maxlength="10000"
+                ></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" id="cancel-inline-comment">Cancel</button>
+            <button type="button" class="btn btn-primary" id="submit-inline-comment">Post Comment</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/comments.js"></script>
+<script>
+    // Initialize commenting system with article data
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.GurgelComments) {
+            window.GurgelComments.init({
+                articleId: '{{ article.id }}',
+                contentHash: '{{ content_html | safe | striptags | truncate(1000, True, "") | e }}'.substring(0, 64)
+            });
+        }
+    });
+</script>
 {% endblock %}
