@@ -468,7 +468,28 @@ main {
   left: calc(50% + 400px);
   top: 120px;
   width: 240px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
   display: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-subtle) transparent;
+}
+
+.toc-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc-wrapper::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+.toc-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
 
 @media (min-width: 1400px) {
