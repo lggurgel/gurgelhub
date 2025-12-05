@@ -6,97 +6,201 @@
 <div class="content-width">
     <!-- Hero Section -->
     <header class="about-header fade-in-up">
-        <span class="about-subtitle">Staff Software Engineer</span>
-        <h1>Hi, I'm Lucas Gurgel 👋</h1>
+        <span class="about-subtitle">Senior Backend Engineer</span>
+        <h1>I make systems <em>talk</em> to each other.</h1>
         <p class="about-intro">
-            I build high-performance, scalable systems and love solving complex engineering challenges.
+            And occasionally teach machines to think for themselves.
         </p>
     </header>
 
-    <!-- Bio Section -->
-    <section style="margin-bottom: 4rem;" class="fade-in-up stagger-1">
-        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8;">
-                With a deep passion for low-level optimization and distributed systems, I specialize in crafting robust
-                solutions that stand the test of scale. My journey involves everything from optimizing GPU kernels for
-                cryptography to building resilient backend architectures.
-            </p>
-        </div>
-    </section>
-
-    <!-- Skills Grid -->
-    <section style="margin-bottom: 4rem;">
-        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;" class="fade-in-up">Technical Arsenal</h2>
-        <div class="skills-grid">
-            <div class="skill-card fade-in-up stagger-1">
-                <h3>
-                    <span style="margin-right: 0.5rem;">🔤</span>
-                    Languages
-                </h3>
-                <p>Python, C++, Go, Rust, JavaScript/TypeScript</p>
+    <!-- Story Section -->
+    <section class="story-section fade-in-up stagger-1">
+        <div class="story-block">
+            <div class="story-marker">
+                <span class="story-icon">☕</span>
             </div>
-            <div class="skill-card fade-in-up stagger-2">
-                <h3>
-                    <span style="margin-right: 0.5rem;">☁️</span>
-                    Backend & Cloud
-                </h3>
-                <p>FastAPI, Django, Docker, Kubernetes, AWS, GCP</p>
-            </div>
-            <div class="skill-card fade-in-up stagger-3">
-                <h3>
-                    <span style="margin-right: 0.5rem;">⚡</span>
-                    Specialties
-                </h3>
-                <p>Distributed Systems, GPU Programming (Metal/CUDA), Cryptography</p>
+            <div class="story-content">
+                <p class="story-lead">
+                    I've spent the last <strong>6+ years</strong> building the invisible
+                    infrastructure that powers real businesses—payment platforms processing
+                    thousands of daily transactions, marketplaces handling billions in volume,
+                    and mentorship platforms connecting people across 140+ countries.
+                </p>
+                <p>
+                    My work lives in the space between <em>"it should just work"</em> and
+                    <em>"why is this so hard?"</em>—making complex systems feel simple.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects -->
-    <section style="margin-bottom: 4rem;">
-        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;" class="fade-in-up">Featured Projects</h2>
+    <!-- What I Actually Do -->
+    <section class="focus-section fade-in-up stagger-2">
+        <h2 class="section-title">
+            <span class="section-number">01</span>
+            What I Actually Do
+        </h2>
 
-        <div class="project-card fade-in-up stagger-1">
-            <div class="project-header">
-                <h3 class="project-title">Silikangaroo</h3>
-                <span class="project-tech" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">C++ / Metal</span>
+        <div class="focus-grid">
+            <div class="focus-card">
+                <div class="focus-icon">🔗</div>
+                <h3>Systems That Scale</h3>
+                <p>
+                    From Django monoliths to containerized microservices on Kubernetes.
+                    I've migrated, optimized, and rebuilt systems to handle real-world
+                    traffic—not just benchmarks.
+                </p>
             </div>
-            <p class="project-description">
-                A high-performance Bitcoin public key recovery tool optimized for Apple Silicon (M1/M2/M3).
-                Leverages the Metal API for GPU acceleration to solve Pollard's Kangaroo algorithm at blazing speeds.
-            </p>
-            <a href="https://github.com/lggurgel/silikongaroo" class="project-link" target="_blank" rel="noopener">
-                View on GitHub
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </a>
+
+            <div class="focus-card">
+                <div class="focus-icon">🤖</div>
+                <h3>AI That Ships</h3>
+                <p>
+                    Not just prototypes—production LLM integrations. Automated code reviews,
+                    intelligent document generation, and data enrichment pipelines that
+                    actually run in the wild.
+                </p>
+            </div>
+
+            <div class="focus-card">
+                <div class="focus-icon">⚡</div>
+                <h3>Events, Not Requests</h3>
+                <p>
+                    RabbitMQ, SQS/SNS, Celery. I build systems that react in real-time,
+                    processing 500K+ daily events with sub-second latency.
+                </p>
+            </div>
         </div>
+    </section>
 
-        <div class="project-card fade-in-up stagger-2">
-            <div class="project-header">
-                <h3 class="project-title">Dockangaroo</h3>
-                <span class="project-tech" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">Python / Docker</span>
+    <!-- The Stack -->
+    <section class="stack-section fade-in-up stagger-3">
+        <h2 class="section-title">
+            <span class="section-number">02</span>
+            The Stack
+        </h2>
+
+        <div class="stack-grid">
+            <div class="stack-category">
+                <h4 class="stack-label">Languages</h4>
+                <div class="stack-items">
+                    <span class="stack-tag primary">Python</span>
+                    <span class="stack-tag primary">TypeScript</span>
+                    <span class="stack-tag">Go</span>
+                </div>
             </div>
-            <p class="project-description">
-                Containerized implementation of Pollard's Kangaroo algorithm. Designed for ease of deployment
-                and reproducibility in hunting Bitcoin puzzle keys.
+
+            <div class="stack-category">
+                <h4 class="stack-label">Frameworks</h4>
+                <div class="stack-items">
+                    <span class="stack-tag">FastAPI</span>
+                    <span class="stack-tag">Django</span>
+                    <span class="stack-tag">Flask</span>
+                    <span class="stack-tag">Node.js</span>
+                </div>
+            </div>
+
+            <div class="stack-category">
+                <h4 class="stack-label">Infrastructure</h4>
+                <div class="stack-items">
+                    <span class="stack-tag">AWS</span>
+                    <span class="stack-tag">Docker</span>
+                    <span class="stack-tag">Kubernetes</span>
+                    <span class="stack-tag">Terraform</span>
+                </div>
+            </div>
+
+            <div class="stack-category">
+                <h4 class="stack-label">AI/ML</h4>
+                <div class="stack-items">
+                    <span class="stack-tag">LangChain</span>
+                    <span class="stack-tag">OpenAI</span>
+                    <span class="stack-tag">Claude</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-section fade-in-up stagger-4">
+        <h2 class="section-title">
+            <span class="section-number">03</span>
+            The Journey
+        </h2>
+
+        <div class="journey-timeline">
+            <div class="journey-item current">
+                <div class="journey-dot"></div>
+                <div class="journey-content">
+                    <span class="journey-date">2023 – Present</span>
+                    <h4>LeafLink</h4>
+                    <p class="journey-role">Senior Backend Engineer</p>
+                    <p class="journey-desc">
+                        Building the infrastructure behind a $5B+ B2B marketplace.
+                        Led the AI integration initiative and microservices migration.
+                    </p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot"></div>
+                <div class="journey-content">
+                    <span class="journey-date">2022 – 2023</span>
+                    <h4>ADPList</h4>
+                    <p class="journey-role">Software Engineer</p>
+                    <p class="journey-desc">
+                        Backend architecture for a global mentorship platform.
+                        ML-based matching and timezone-aware notifications.
+                    </p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot"></div>
+                <div class="journey-content">
+                    <span class="journey-date">2019 – 2022</span>
+                    <h4>São Paulo Startups</h4>
+                    <p class="journey-role">Software Engineer</p>
+                    <p class="journey-desc">
+                        Payment systems, order pipelines, marketplace integrations.
+                        The messy, beautiful work of early-stage tech.
+                    </p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-dot"></div>
+                <div class="journey-content">
+                    <span class="journey-date">2018 – 2022</span>
+                    <h4>University of Brasília</h4>
+                    <p class="journey-role">B.S. Computer Science</p>
+                    <p class="journey-desc">
+                        Top 5% of cohort. Where the obsession began.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beyond Code -->
+    <section class="beyond-section fade-in-up stagger-5">
+        <div class="beyond-card">
+            <h3>Beyond the Terminal</h3>
+            <p>
+                Based in <strong>Brasília, Brazil</strong>, I write here about the things
+                I learn: distributed systems, production war stories, and the occasional
+                deep-dive into something that kept me up at night.
             </p>
-            <a href="https://github.com/lggurgel/dockangaroo" class="project-link" target="_blank" rel="noopener">
-                View on GitHub
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </a>
+            <p class="beyond-cta">
+                This blog is my way of thinking out loud. Stick around.
+            </p>
         </div>
     </section>
 
     <!-- Connect Section -->
-    <section style="text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-subtle);" class="fade-in-up">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Let's Connect</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Find me on these platforms</p>
+    <section class="connect-section fade-in-up">
+        <h2 class="connect-title">Let's Connect</h2>
+        <p class="connect-subtitle">Always happy to talk systems, startups, or side projects</p>
 
         <div class="social-links">
             <a href="https://github.com/lggurgel" class="social-link" target="_blank" rel="noopener" title="GitHub">
